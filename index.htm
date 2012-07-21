@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=GB2312">
+<meta http-equiv="cache-control" content="no-cache">
+<title>bobo's movie site</title>
+<style type="text/css">
+<!--
+.list { font-size:18px; color:#FFFFFF;}
+.list1 {font-size:18px; color:#000000;}
+.numClass {font-size:15px;}
+-->
+</style>
+<script type="text/javascript">
+iPanel.eventFrame.initPage(window);
+iPanel.EnableLoadingIcon = 1;
+iPanel.EnableLoadingIconPermanent = 1;
+
+var menuTimeoutFlag = -1;
+var nBeginMenu = 0;
+var nEndMenu = 3;
+var nIterMenu = 0;
+
+function eventHandler(eventObj, type)
+{
+    switch (event.which)
+    {
+        case 5206:
+            break;
+    }
+
+    //alert(event.which + " " + eventObj.code);
+    switch (eventObj.code) 
+    {
+        case "KEY_UP":
+            if (nIterMenu > nBeginMenu)
+            {
+                nIterMenu -= 1;
+            }
+            ShowMenu(nIterMenu);
+            break;
+        case "KEY_DOWN":
+            if (nIterMenu+1 != nEndMenu)
+            {
+                nIterMenu += 1;
+            }
+            ShowMenu(nIterMenu);
+            break;
+        case "KEY_LEFT":
+            break;
+        case "KEY_RIGHT":
+            break;
+        case "KEY_SELECT":
+            DoSelect(nIterMenu);
+            break;
+        case "KEY_EXIT":
+        case "KEY_BACK":
+            E.exitToPlay();
+            break;
+    }
+  return 0;
+}
+
+function ShowMenu(pos)
+{
+    for (var iter=nBeginMenu; iter!=nEndMenu; iter++)
+    {
+        $("content"+iter).style.color = "#FFFFFF";
+    }
+    $("content"+pos).style.color = "#000000";
+}
+
+function DoSelect(pos)
+{
+    switch (pos)
+    {
+        case 0:
+            Movie();
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+    }
+}
+
+function init(){
+	media.video.fullScreen();
+}
+
+function Movie()
+{   
+    //DVB.stopAV()
+    //VOD.changeServer("isma_v2","ip");
+    var url = "rtsp://192.168.1.111:8554/next.mp3";
+	media.video.setPosition(440,300,440,274);
+    media.AV.open(url, "VOD");
+}
+
+</script>
+</head>
+
+<body leftmargin="0" topmargin="0" onload="init()" bgcolor="transparent">
+<div id="list0" style="position:absolute; left:5px; top:105px; width:149px; height:296px; z-index:1; background-image: url(ui://l_bg6.gif);">
+	<div id="R0" style="position:absolute;left:2px;top:0px;width:145px;height:292px;">
+	  <table cellpadding="0" cellspacing="0" width="144" align="center" border="0">
+		<tbody><tr><td colspan="3" height="17"></td></tr>
+        <tr>
+          <td id="num0" class="numClass" height="39" width="32" align="center">1</td>
+          <td colspan="2" class="list1" id="content0">Movie</td>
+        </tr>
+        <tr>
+          <td id="num1" class="numClass" height="39" width="32" align="center">2</td>
+          <td colspan="2" class="list" id="content1">Music</td>
+        </tr>
+        <tr>
+          <td id="num2" class="numClass" height="39" width="32" align="center">3</td>
+          <td colspan="2" class="list" id="content2">Others</td>
+        </tr>
+      </tbody></table>
+	</div>
+</div>
+
+<div id="bottom" style="position:absolute;left:4px;top:414;width:632px;height:109px;z-index:3;background-position:bottom; background-repeat:no-repeat;">
+  <table cellpadding="0" cellspacing="0" border="0">
+    <tbody><tr>
+      <td height="107" valign="bottom" width="145" align="right"><img src="ui://L0_1.gif" id="menuPic0" height="107" width="145"></td>
+    </tr>
+  </tbody></table>
+</div>
+</body>
+</html>
